@@ -15,25 +15,16 @@
 
 MANIFESTS=manifests-openshift
 
-if [[ ${3} == "" ]]
-then
-  echo "Usage: buildAndDeployToOpenshift.sh  default-route/project_name internal-route/project_name route_host [podman]"
-  exit
-fi
+
 
 IMAGE_PREFIX_EXTERNAL=${1}
-IMAGE_PREFIX=${2}
-ROUTE_HOST=${3}
+IMAGE_PREFIX=${IMAGE_PREFIX_EXTERNAL}
+ROUTE_HOST=${2}
 
-if [[ ${4} == "" ]]
-then
-  echo "Using Docker to build/push"
-  BUILD_TOOL="docker"
-else
-  echo "Using podman to build/push"
-  BUILD_TOOL="podman"
-  TLS_VERIFY="--tls-verify=false"
-fi
+
+echo "Using Docker to build/push"
+BUILD_TOOL="docker"
+
 
 
 echo "Image Prefix External=${IMAGE_PREFIX_EXTERNAL}"
@@ -187,6 +178,3 @@ sed -i.bak "s@${ROUTE_HOST}@_HOST_@" ${MANIFESTS}/acmeair-flightservice-route.ya
 
 rm ${MANIFESTS}/acmeair-flightservice-route.yaml.bak
 rm ${MANIFESTS}/deploy-acmeair-flightservice-java.yaml.bak
-
-
-
