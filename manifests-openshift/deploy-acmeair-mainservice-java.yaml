@@ -23,6 +23,13 @@ spec:
         - containerPort: 9080
         - containerPort: 9443
         imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "300m"
+            memory: "256Mi"
+          limits:
+            cpu: "2000m"
+            memory: "256Mi"
         env:
         - name: USERNAME
           value: admin
