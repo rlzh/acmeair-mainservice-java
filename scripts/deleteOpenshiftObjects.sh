@@ -16,18 +16,29 @@
 
 cd "$(dirname "$0")"
 cd ..
-mvn clean package
+kubectl delete -f manifests-openshift
+
+sleep 2
 
 cd ../acmeair-authservice-java
-mvn clean package
+kubectl delete -f manifests-openshift
+
+sleep 2
 
 cd ../acmeair-bookingservice-java
-mvn clean package
+kubectl delete -f manifests-openshift
+
+sleep 2
 
 cd ../acmeair-customerservice-java
-mvn clean package
+kubectl delete -f manifests-openshift
+
+sleep 2
 
 cd ../acmeair-flightservice-java
-mvn clean package
+kubectl delete -f manifests-openshift
+
+sleep 2
+
 
 
